@@ -41,7 +41,7 @@ helpers do
 end
 
 before do
-  session[:lists] ||= []
+  session[:lists] ||= [] # if session[:lists] is falsey, set return value to `[]`
 end
 
 get "/" do
@@ -53,6 +53,11 @@ get "/lists" do
   @lists = session[:lists]
   erb(:lists, layout: :layout)
 end
+
+# get "/lists/new" do
+#   session[:lists] << { name: "new lists", todos: [] }
+#   redirect "/lists"
+# end
 
 # render the new list form
 get "/lists/new" do
@@ -180,5 +185,4 @@ post "/lists/:id/complete_all" do
 
   session[:success] = "All todos have been completed."
   redirect "/lists/#{@list_id}"
-
 end
