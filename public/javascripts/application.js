@@ -1,9 +1,9 @@
 // public/javascripts/application.js
-$(function() {
+$(function() { // the `$` sign is a jQuery object and we're passing it an anonymous function
 
-  $("form.delete").submit(function(event) {
-    event.preventDefault();
-    event.stopPropagation();
+  $("form.delete").submit(function(event) { // returning all forms where `class=delete`
+    event.preventDefault(); // prevents the default behavior, which is submitting the form when the delete link is clicked
+    event.stopPropagation(); // prevents this `event` from being interpreted by another page or the browser
 
     var ok = confirm("Are you sure? This cannot be undone!");
     if (ok) {

@@ -82,6 +82,14 @@ def error_for_todo(name)
   end
 end
 
+##############
+def next_list_id(session)
+  # session[:lists] = {}
+  # session[:lists] = {{id: 0, name: name0, ...}, {id: 1, name: name1, ...}, {id: 2, name: name2, ...}} ...
+  max = session.map { |list| list[:id] }.max || 0
+  max + 1
+end
+
 # create a new list
 post "/lists" do
   list_name = params[:list_name].strip
@@ -91,20 +99,30 @@ post "/lists" do
     session[:error] = error
     erb(:new_list, layout: :layout)
   else
-    session[:lists] << { name: list_name, todos: [] }
+    id = next_list_id(session[:lists])
+    session[:lists] << { id: id, name: list_name, todos: [] } # session[:lists] << { name: list_name, todos: [] }
     session[:success] = "The list has been created."
     redirect "/lists"
   end
 end
 
-def load_list(index)
-  list = session[:lists][index] if index && session[:lists][index]
+# def load_list(index)
+#   list = session[:lists][index] if index && session[:lists][index]
+#   return list if list
+
+#   session[:error] = "The specified list was not found."
+#   redirect "/lists"
+# end
+
+def load_list(id)
+  list = session[:lists].find { |list| list[:id] == id } 
   return list if list
 
   session[:error] = "The specified list was not found."
   redirect "/lists"
 end
 
+# render a list
 get "/lists/:id" do
   @list_id = params[:id].to_i
   @list = load_list(@list_id)
@@ -139,7 +157,8 @@ end
 # delete a list
 post "/lists/:id/destroy" do
   id = params[:id].to_i
-  session[:lists].delete_at(id)
+  session[:lists].reject! { |list| list[:id] == id } # session[:lists].delete_at(id)
+
   if env["HTTP_X_REQUESTED_WITH"] == "XMLHttpRequest"
     "/lists"
   else
