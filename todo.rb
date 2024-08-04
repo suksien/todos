@@ -3,6 +3,14 @@ require "sinatra/reloader" if development?
 require "sinatra/content_for"
 require "tilt/erubis"
 
+# this sets up Sinatra to use sessions
+# if a value is not provided for `:session_secret`, Sinatra will generate a random
+# session_secret everytime it starts. I.e., a different secret everytime the application
+# is stopped and started again. Since the secret is used to verify the data stored 
+# in that session, if that secret value changes, then any session that exists will 
+# become invalid immediately. By providing a secret value, we make sure that any
+# sessions that are created will continue to work no matter how many times we 
+# restart Sinatra.
 configure do
   enable :sessions
   set(:session_secret, SecureRandom.hex(32))
