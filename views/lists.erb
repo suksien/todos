@@ -1,6 +1,6 @@
 <ul id="lists">
   <% sort_lists(@lists) do |list| %>
-    <li class="<%= list_class(list) %>">
+    <li class="<%= list_class(list) %>"> # `list_class` to determine the appropriate class name to use
       <a href="/lists/<%= list[:id] %>">
         <h2><%= list[:name] %></h2>
         <p>

@@ -211,7 +211,7 @@ post "/lists/:list_id/todos/:id/destroy" do
     status 204
   else
     session[:success] = "The todo has been deleted."
-    redirect "/lists/#{@list_id}"
+    redirect "/lists/#{@list_id}" # redirect the user back to the page they came from
   end
 end
 
