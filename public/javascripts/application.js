@@ -1,6 +1,6 @@
 // public/javascripts/application.js
-$(function() { // the `$` sign is a jQuery object and we're passing it an anonymous function
-
+// the `$` sign is a jQuery object and we're passing it an anonymous function, which jQuery will call
+$(function() {
   $("form.delete").submit(function(event) { // returning all forms where `class=delete`
     event.preventDefault(); // prevents the default behavior, which is submitting the form when the delete link is clicked
     event.stopPropagation(); // prevents this `event` from being interpreted by another page or the browser
