@@ -1,16 +1,16 @@
-<form action="/lists" method="post"> # this means the form is submitted to "/lists"
+<form action="/lists" method="post"> <%# this means the form is submitted to "/lists" %>
   <dl>
     <dt>
       <label for="list_name">Enter the name for your new lists:</label>
     </dt>
     <dd>
-      # the value for `input_name` can be used to retrieve the value from the `params` hash in Sinatra
-      # i.e., params[:list_name] to get the value entered
+      <%# the value for `input_name` can be used to retrieve the value from the `params` hash in Sinatra %>
+      <%# i.e., params[:list_name] to get the value entered %>
       <input name="list_name" placeholder="List Name" type="text" value="">
     </dd>
   </dl>
   <fieldset class="actions">
-    <input type="submit" value="Save"> # Clicking "save" will "submit" the form
+    <input type="submit" value="Save"> <%# Clicking "save" will "submit" the form %>
     <a href="/lists">Cancel</a>
   </fieldset>
 </form>
