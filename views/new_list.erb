@@ -1,10 +1,10 @@
-<form action="/lists" method="post"> <%# this means the form is submitted to "/lists" %>
+<form action="/lists" method="post"> <%# this means the form is submitted to "/lists" via a post request %>
   <dl>
     <dt>
       <label for="list_name">Enter the name for your new lists:</label>
     </dt>
     <dd>
-      <%# the value for `input_name` can be used to retrieve the value from the `params` hash in Sinatra %>
+      <%# the value for `name` attribute can be used to retrieve the value from the `params` hash in Sinatra %>
       <%# i.e., params[:list_name] to get the value entered %>
       <input name="list_name" placeholder="List Name" type="text" value="">
     </dd>
